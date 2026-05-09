@@ -1,0 +1,303 @@
+/* =========================================
+   1. Page Transitions & Reset
+   ========================================= */
+html { scroll-behavior: smooth; }
+
+/* The Fade-In Animation */
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Class to be applied to the main <section> or <main> tag of each page */
+.fade-in {
+    animation: fadeInPage 0.8s ease-out forwards;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #4a4a4a;
+    background-color: #fffafb;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* =========================================
+   2. Navigation Bar
+   ========================================= */
+.navbar {
+    background-color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #d88a8a;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover { color: #d88a8a; }
+
+/* =========================================
+   3. Captions (Used across Main & Shelf)
+   ========================================= */
+.memory-caption {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s, border-width 0.4s;
+    z-index: 10;
+    pointer-events: none;
+}
+.memory-caption:hover{
+    border-width: 2px;
+    border-color:#880e4f
+}
+/* =========================================
+   4. Main Page (Hero & Gallery)
+   ========================================= */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=2070') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.hero h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.photo-card { position: relative; }
+
+.photo-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease;
+}
+
+.photo-card .memory-caption {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.photo-card:hover img { transform: scale(1.02); }
+.photo-card:hover .memory-caption { opacity: 1; bottom: 45px; }
+
+/* =========================================
+   5. Shelf Page & Decorations
+   ========================================= */
+.shelf-page {
+    background-color: #f9f9f9;
+    padding-bottom: 80px;
+}
+
+.shelf-header {
+    padding: 60px 0 20px;
+    background: linear-gradient(to bottom, #fff0f3, #f9f9f9);
+}
+
+.shelf-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: #d88a8a;
+    margin: 0;
+}
+
+.wall {
+    position: relative;
+    max-width: 900px;
+    margin: 20px auto;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: space-around; 
+}
+
+.floating-shelf { width: 85%; display: flex; flex-direction: column; }
+
+.shelf-board {
+    height: 40px;
+    background: linear-gradient(to bottom, #bc946c 0%, #8d6745 100%);
+    border-radius: 2px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    width: 100%;
+}
+
+.shelf-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 25px;
+    padding-bottom: 2px;
+}
+
+/* Shelf Items (Optimized for Transparent PNGs) */
+.item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item img {
+    max-height: 180px;
+    filter: drop-shadow(3px 5px 8px rgba(0,0,0,0.3));
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: block;
+    cursor: pointer;
+}
+
+.item .memory-caption {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+}
+
+.item:hover img { transform: translateY(-15px) scale(1.05); }
+.item:hover .memory-caption { opacity: 1; bottom: 110%; }
+
+/* CSS Decorations (Plant & Books) */
+.decorative-plant { display: flex; flex-direction: column; align-items: center; }
+.pot { width: 50px; height: 45px; background: #d4a373; border-radius: 0 0 10px 10px; }
+.leaf {
+    width: 10px; height: 30px; background: #606c38; border-radius: 50%;
+    box-shadow: 15px -10px 0 #283618, -15px -5px 0 #606c38;
+}
+
+.book-stack { display: flex; gap: 2px; align-items: flex-end; }
+.book { width: 15px; border-radius: 2px 2px 0 0; }
+.spine-1 { height: 100px; background: #588157; }
+.spine-2 { height: 110px; background: #344e41; width: 18px; }
+.spine-3 { height: 90px; background: #a3b18a; }
+
+/* =========================================
+   6. Links Page Styles
+   ========================================= */
+.links-page {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(174, 237, 255, 0.75));
+    background-attachment: fixed;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.links-container {
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+}
+
+.profile-mini {
+    width: 100px; height: 100px;
+    background-color: #68b3ec;
+    background-size: cover;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    border: 4px solid rgb(1, 78, 112);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #4a4a4a;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.link-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 30px rgba(216, 138, 138, 0.2);
+    border-color: #d88a8a;
+}
+
+.link-icon { font-size: 1.6rem; margin-right: 20px; }
+.link-text strong { display: block; font-size: 1.1rem; color: #333; }
+.link-text p { margin: 0; font-size: 0.85rem; color: #777; }
+
+/* =========================================
+   7. Footer & Responsive
+   ========================================= */
+footer {
+    padding: 60px;
+    background-color: #fce4ec;
+    text-align: center;
+    color: #880e4f;
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    .shelf-title { font-size: 2.5rem; }
+    .floating-shelf { width: 95%; }
+    .item img { max-height: 120px; }
+}
